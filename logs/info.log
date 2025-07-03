@@ -40,3 +40,4 @@
 2025-07-03 19:24:29 [INFO]: User shadowshukla76@gmail.com fetched books with filters: genre=all, author=all, publishedYear=all, page=1, limit=2
 2025-07-03 19:24:39 [INFO]: User shadowshukla76@gmail.com fetched book with id=4e1169e4-27e6-4a23-ac30-8c3fd01d4c50
 2025-07-03 19:24:46 [INFO]: User shadowshukla76@gmail.com deleted book id=4e1169e4-27e6-4a23-ac30-8c3fd01d4c50
+2025-07-03 19:24:56 [INFO]: User shadowshukla76@gmail.com fetched books with filters: genre=all, author=all, publishedYear=all, page=1, limit=1
