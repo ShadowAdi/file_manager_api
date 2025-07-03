@@ -4,7 +4,6 @@ import { configEnvs, PORT } from "./envs/index.js";
 import { CustomErrorHandler } from "./middlewares/errorHandler.js";
 import { userRouter } from "./routes/userRouter.js";
 
-
 const app = express();
 configEnvs();
 
@@ -17,8 +16,6 @@ app.use(
 );
 
 app.use(express.json());
-
-
 
 app.use("/api/user", userRouter);
 
