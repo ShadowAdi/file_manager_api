@@ -1,8 +1,8 @@
 import express from "express";
 import cors from "cors";
 import { configEnvs, PORT } from "./envs/index.js";
-import { CustomErrorHandler } from "./middlewares/errorHandler.js";
-import { userRouter } from "./routes/userRouter.js";
+import { CustomErrorHandler } from "./middlewares/ErrorMiddleware.js";
+import { userRouter } from "./router/userRouter.js";
 
 const app = express();
 configEnvs();

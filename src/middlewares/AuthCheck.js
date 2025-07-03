@@ -1,4 +1,3 @@
-import mongoose from "mongoose";
 import { JWT_SECRET_KEY } from "../envs/index.js";
 import { AppError } from "../utils/AppError.js";
 import { logger } from "../utils/logger.js";
@@ -23,10 +22,7 @@ export const CheckAuth = async (req, res, next) => {
     }
 
     const decoded = jwt.verify(token, Jwt_Secret);
-    if (!mongoose.Types.ObjectId.isValid(decoded.sub)) {
-      logger.error(`Invalid user ID in token: ${decoded.sub}`);
-      throw new Error("Invalid user id");
-    }
+
     req.user = decoded;
 
     next();

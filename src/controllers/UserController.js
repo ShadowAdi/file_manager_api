@@ -1,37 +1,43 @@
 import bcrypt from "bcrypt";
-import { UserModel } from "../models/UserSchema.js";
 import { logger } from "../utils/logger.js";
 import { CustomTryCatch } from "../utils/CustomTryCatch.js";
 import { AppError } from "../utils/AppError.js";
 import { TokenGenerator } from "../utils/TokenGenerator.js";
+import { createUser } from "../utils/ReadWrite.js";
+import { v4 as uuidv4 } from "uuid";
 
 export const RegisterUser = CustomTryCatch(async (req, res, next) => {
-  const { email, password } = req.body;
-  if (!email || !password) {
+  const { email, password, name } = req.body;
+  if (!email || !password || !name) {
     logger.error(
       "Fields are not provided email: " +
         email +
         " and password is: " +
-        password
+        password +
+        " and name is: " +
+        name
     );
     return next(
       new AppError(
-        `Required Data is not present Email:${email},password:${password}`,
+        `Required Data is not present Email:${email},password:${password} and name: ${name}`,
         404
       )
     );
   }
-  const isUserExist = await UserModel.findOne({ email });
-
+  const users = await readUsers();
+  const isUserExist = users.find((user) => user.email === email);
   if (isUserExist) {
-    logger.error(`User already exists with the mail: ${email}`);
-    return next(
-      new AppError(`User already exists with the mail: ${email}`, 404)
+    logger.error(
+      `Required Data already Exist. Email:${email}, password:${password}, `
+    );
+    console.log(
+      `Required Data already Exist.  Email:${email}, password:${password}`
     );
   }
   const hashedPassword = await bcrypt.hash(password, 10);
-  const newUser = new UserModel({ email, password: hashedPassword });
-  await newUser.save();
+  const user = { email, name, password: hashedPassword, id: uuidv4() };
+  await createUser(user);
+
   logger.info("User is created");
   return res.status(201).json({
     statusCode: 201,
@@ -57,14 +63,16 @@ export const LoginUser = CustomTryCatch(async (req, res, next) => {
       )
     );
   }
-  const isUserExist = await UserModel.findOne({ email });
+  const users = await readUsers();
+  const isUserExist = users.find((user) => user.email === email);
   if (!isUserExist) {
-    logger.error(`Failed to get user with email: ${email}`);
-    return next(
-      new AppError(`Failed to get the user with the email: ${email}`, 404)
-    );
+    logger.error(`User Not Exist. Email:${email}, password:${password}, `);
+    console.log(`User Not Exist.  Email:${email}, password:${password}`);
   }
-  const isPasswordCorrect =await bcrypt.compare(password, isUserExist.password);
+  const isPasswordCorrect = await bcrypt.compare(
+    password,
+    isUserExist.password
+  );
   if (!isPasswordCorrect) {
     logger.error(
       `Invalid Credentails email: ${email} and password: ${password}`
@@ -106,13 +114,13 @@ export const AuthenticatedUser = CustomTryCatch(async (req, res, next) => {
       new AppError(`Failed to get the authenticated user ${sub}`, 404)
     );
   }
-  const userFound = await UserModel.findById(sub).select("-password");
-  if (!userFound) {
-    logger.error(`User With Id Do Not Exist: ${sub}`);
-    console.log(`User With Id Do Not Exist: ${sub}`);
-    return next(new AppError(`User With Id Do Not Exist: ${sub}`, 404));
+  const users = await readUsers();
+  const isUserExist = users.find((user) => user.email === email);
+  if (!isUserExist) {
+    logger.error(`User Not Exist. Email:${email}, password:${password}, `);
+    console.log(`User Not Exist.  Email:${email}, password:${password}`);
   }
-  if (userFound.email !== email) {
+  if (isUserExist.email !== email) {
     logger.error(`User With email Do Not Exist: ${email}`);
     console.log(`User With email Do Not Exist: ${email}`);
     return next(new AppError(`User With email Do Not Exist: ${email}`, 404));
