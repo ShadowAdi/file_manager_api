@@ -3,46 +3,36 @@ import { logger } from "../utils/logger.js";
 import { CustomTryCatch } from "../utils/CustomTryCatch.js";
 import { AppError } from "../utils/AppError.js";
 import { TokenGenerator } from "../utils/TokenGenerator.js";
-import { createUser } from "../utils/ReadWrite.js";
+import { createUser, readUsers } from "../utils/ReadWrite.js";
 import { v4 as uuidv4 } from "uuid";
 
 export const RegisterUser = CustomTryCatch(async (req, res, next) => {
   const { email, password, name } = req.body;
+
   if (!email || !password || !name) {
     logger.error(
-      "Fields are not provided email: " +
-        email +
-        " and password is: " +
-        password +
-        " and name is: " +
-        name
+      `Missing fields: email=${email}, password=${password}, name=${name}`
     );
-    return next(
-      new AppError(
-        `Required Data is not present Email:${email},password:${password} and name: ${name}`,
-        404
-      )
-    );
+    return next(new AppError(`Required data missing`, 400));
   }
+
   const users = await readUsers();
   const isUserExist = users.find((user) => user.email === email);
+
   if (isUserExist) {
-    logger.error(
-      `Required Data already Exist. Email:${email}, password:${password}, `
-    );
-    console.log(
-      `Required Data already Exist.  Email:${email}, password:${password}`
-    );
+    logger.error(`User already exists with email: ${email}`);
+    return next(new AppError(`User already exists with email: ${email}`, 409));
   }
+
   const hashedPassword = await bcrypt.hash(password, 10);
-  const user = { email, name, password: hashedPassword, id: uuidv4() };
+  const user = { id: uuidv4(), email, name, password: hashedPassword };
+
   await createUser(user);
 
-  logger.info("User is created");
+  logger.info(`User created with email: ${email}`);
   return res.status(201).json({
-    statusCode: 201,
-    message: "User is created",
     success: true,
+    message: "User created successfully",
   });
 });
 
@@ -86,7 +76,7 @@ export const LoginUser = CustomTryCatch(async (req, res, next) => {
   }
   const payload = {
     email: isUserExist.email,
-    sub: isUserExist._id,
+    sub: isUserExist.id,
   };
   const token = await TokenGenerator(payload);
   return res.status(200).json({
@@ -127,7 +117,7 @@ export const AuthenticatedUser = CustomTryCatch(async (req, res, next) => {
   }
   return res.status(200).json({
     statusCode: 200,
-    user: userFound,
+    user: isUserExist,
     message: "User Found",
     success: true,
   });

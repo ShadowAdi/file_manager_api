@@ -3,6 +3,7 @@ import cors from "cors";
 import { configEnvs, PORT } from "./envs/index.js";
 import { CustomErrorHandler } from "./middlewares/ErrorMiddleware.js";
 import { userRouter } from "./router/userRouter.js";
+import { bookRouter } from "./router/bookRouter.js";
 
 const app = express();
 configEnvs();
@@ -18,6 +19,7 @@ app.use(
 app.use(express.json());
 
 app.use("/api/user", userRouter);
+app.use("/api/books", bookRouter);
 
 app.use(CustomErrorHandler);
 

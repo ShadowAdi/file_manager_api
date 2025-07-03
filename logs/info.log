@@ -1,0 +1,42 @@
+2025-07-03 10:39:31 [ERROR]: Failed to get the error the status code is error and the message is readUsers is not defined
+2025-07-03 10:39:48 [ERROR]: Failed to get the error the status code is error and the message is Unexpected end of JSON input
+2025-07-03 10:43:48 [ERROR]: Failed to get the error the status code is error and the message is Unexpected end of JSON input
+2025-07-03 10:47:44 [INFO]: User created with email: shadowshukla76@gmail.com
+2025-07-03 10:48:40 [ERROR]: Failed to get the authenticated user undefined
+2025-07-03 10:48:40 [ERROR]: Failed to get the error the status code is fail and the message is Failed to get the authenticated user undefined
+2025-07-03 10:50:00 [ERROR]: Failed to get the error the status code is error and the message is userFound is not defined
+2025-07-03 19:01:08 [ERROR]: Failed to get the error the status code is error and the message is readUsers is not defined
+2025-07-03 19:01:24 [ERROR]: Failed to get the error the status code is error and the message is createBook is not defined
+2025-07-03 19:01:33 [ERROR]: Failed to get the error the status code is error and the message is logger is not defined
+2025-07-03 19:02:02 [ERROR]: Book already exists with title: Halloweeens
+2025-07-03 19:02:02 [ERROR]: Failed to get the error the status code is fail and the message is Book already exists with title: Halloweeens
+2025-07-03 19:02:13 [INFO]: User shadowshukla76@gmail.com fetched all books
+2025-07-03 19:02:29 [INFO]: User shadowshukla76@gmail.com fetched book with id=cdd533c3-1365-4559-a6ba-82bd17dbb93b
+2025-07-03 19:04:16 [INFO]: User shadowshukla76@gmail.com fetched book with id=cdd533c3-1365-4559-a6ba-82bd17dbb93b
+2025-07-03 19:04:46 [INFO]: User shadowshukla76@gmail.com updated book id=cdd533c3-1365-4559-a6ba-82bd17dbb93b
+2025-07-03 19:04:55 [INFO]: User shadowshukla76@gmail.com fetched book with id=cdd533c3-1365-4559-a6ba-82bd17dbb93b
+2025-07-03 19:05:04 [INFO]: User shadowshukla76@gmail.com deleted book id=cdd533c3-1365-4559-a6ba-82bd17dbb93b
+2025-07-03 19:09:06 [ERROR]: Book already exists with title: Halloweeens
+2025-07-03 19:09:06 [ERROR]: Failed to get the error the status code is fail and the message is Book already exists with title: Halloweeens
+2025-07-03 19:09:24 [INFO]: Book created: title=anabelle, by user=shadowshukla76@gmail.com
+2025-07-03 19:13:13 [ERROR]: Book already exists with title: anabelle
+2025-07-03 19:13:13 [ERROR]: Failed to get the error the status code is fail and the message is Book already exists with title: anabelle
+2025-07-03 19:13:19 [INFO]: Book created: title=man, by user=shadowshukla76@gmail.com
+2025-07-03 19:13:25 [ERROR]: Failed to get the error the status code is error and the message is books is not defined
+2025-07-03 19:13:49 [INFO]: User shadowshukla76@gmail.com fetched books with filters: genre=all, author=all, publishedYear=all, page=1, limit=5
+2025-07-03 19:14:09 [ERROR]: Failed to get the error the status code is error and the message is Cannot read properties of undefined (reading 'toLowerCase')
+2025-07-03 19:15:42 [INFO]: User shadowshukla76@gmail.com fetched books with filters: genre=all, author=Steven, publishedYear=all, page=1, limit=2
+2025-07-03 19:15:50 [INFO]: User shadowshukla76@gmail.com fetched books with filters: genre=all, author=all, publishedYear=all, page=1, limit=5
+2025-07-03 19:16:00 [INFO]: User shadowshukla76@gmail.com fetched books with filters: genre=all, author=all, publishedYear=all, page=1, limit=5
+2025-07-03 19:16:30 [INFO]: User shadowshukla76@gmail.com fetched books with filters: genre=Horror, author=all, publishedYear=all, page=1, limit=2
+2025-07-03 19:16:39 [INFO]: User shadowshukla76@gmail.com fetched books with filters: genre=all, author=all, publishedYear=all, page=1, limit=5
+2025-07-03 19:17:45 [INFO]: Book created: title=man, by user=shadowshukla76@gmail.com
+2025-07-03 19:17:57 [INFO]: User shadowshukla76@gmail.com fetched books with filters: genre=all, author=all, publishedYear=all, page=1, limit=1
+2025-07-03 19:18:05 [INFO]: User shadowshukla76@gmail.com fetched book with id=d1e7d0cf-7605-4559-b607-99aa27e535b7
+2025-07-03 19:18:41 [INFO]: User shadowshukla76@gmail.com updated book id=d1e7d0cf-7605-4559-b607-99aa27e535b7
+2025-07-03 19:23:14 [INFO]: Book created: title=man, by user=shadowshukla76@gmail.com
+2025-07-03 19:23:47 [INFO]: User shadowshukla76@gmail.com updated book id=4e1169e4-27e6-4a23-ac30-8c3fd01d4c50
+2025-07-03 19:24:20 [INFO]: Book created: title=woman, by user=shadowshukla76@gmail.com
+2025-07-03 19:24:29 [INFO]: User shadowshukla76@gmail.com fetched books with filters: genre=all, author=all, publishedYear=all, page=1, limit=2
+2025-07-03 19:24:39 [INFO]: User shadowshukla76@gmail.com fetched book with id=4e1169e4-27e6-4a23-ac30-8c3fd01d4c50
+2025-07-03 19:24:46 [INFO]: User shadowshukla76@gmail.com deleted book id=4e1169e4-27e6-4a23-ac30-8c3fd01d4c50

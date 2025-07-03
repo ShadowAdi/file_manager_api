@@ -5,23 +5,37 @@ const usersFile = path.resolve("src/data/User.json");
 const booksFile = path.resolve("src/data/Book.json");
 
 export async function readUsers() {
-  const data = await fs.readFile(usersFile);
-  return JSON.parse(data);
+  try {
+    const data = await fs.readFile(usersFile, "utf-8");
+    return data ? JSON.parse(data) : [];
+  } catch (err) {
+    if (err.code === "ENOENT") return [];
+    throw err;
+  }
 }
 
 export async function createUser(user) {
-  const createUser=await fs.writeFile(usersFile, JSON.stringify(user, null, 2));
-  return createUser
+  const users = await readUsers();
+  users.push(user);
+  await fs.writeFile(usersFile, JSON.stringify(users, null, 2));
 }
 
-
 export async function readBooks() {
-  const data = await fs.readFile(booksFile);
-  return JSON.parse(data);
+  try {
+    const data = await fs.readFile(booksFile, "utf-8");
+    return data ? JSON.parse(data) : [];
+  } catch (err) {
+    if (err.code === "ENOENT") return [];
+    throw err;
+  }
+}
+
+export async function writeBooks(books) {
+  await fs.writeFile(booksFile, JSON.stringify(books, null, 2));
 }
 
 export async function createBook(book) {
-  await fs.writeFile(booksFile, JSON.stringify(book, null, 2));
+  const books = await readBooks();
+  books.push(book);
+  await writeBooks(books);
 }
-
-
