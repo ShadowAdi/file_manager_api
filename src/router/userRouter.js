@@ -1,10 +1,6 @@
 import express from "express";
-import {
-  AuthenticatedUser,
-  LoginUser,
-  RegisterUser,
-} from "../controllers/userController.js";
 import { CheckAuth } from "../middlewares/AuthCheck.js";
+import { AuthenticatedUser, LoginUser, RegisterUser } from "../controllers/UserController.js";
 
 export const userRouter = express.Router();
 
